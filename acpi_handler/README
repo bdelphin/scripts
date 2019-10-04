@@ -1,0 +1,6 @@
+
+In order to lock with custom script (using i3lock with blurred desktop) on power button input & lid closed,
+install acpid, and copy handler.sh in place of /etc/acpi/handler.sh
+
+replace actions with ignore in /etc/systemd/logind.conf
+and set XF86PowerOff action with xbindkey.
