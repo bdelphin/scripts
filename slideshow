@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+ echo "Please provide the file to open."
+ exit
+fi
+
+# Terminate already running bar instances
+killall -q polybar
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+zathura -P 0 --mode presentation $1
+
+~/.config/polybar/launch.sh
