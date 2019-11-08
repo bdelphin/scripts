@@ -11,8 +11,8 @@ status=$(systemctl is-active $1)
 
 if [ "$status" == "active" ];
 then
-    echo $status
+    echo $1: $status
     exit
 fi
 
-echo -e "\e[31m$status\e[0m"
+echo -e "$1: \e[31m$status\e[0m"
