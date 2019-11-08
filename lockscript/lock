@@ -2,7 +2,7 @@
 
 # Defaults
 
-notify-send "Locking ..."
+notify-send "Locking ..." --icon="/usr/share/icons/Papirus/48x48/status/stock_lock.svg"
 
 DISPLAY_RE="([0-9]+)x([0-9]+)\\+([0-9]+)\\+([0-9]+)"
 IMAGE_RE="([0-9]+)x([0-9]+)"

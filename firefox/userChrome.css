@@ -1,0 +1,61 @@
+#back-button, #forward-button, #identity-box {
+  display: none;
+}
+
+#nav-bar {
+  background-color: #3e364d !important;
+  font-family: Iosevka Medium !important;
+  font-size: 13px;
+  padding: 6px !important;
+}
+
+#navigator-toolbox {
+  background-color: #201732 !important;
+  border-bottom-width: 0 !important;
+}
+
+#urlbar, .searchbar-textbox {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab::after,
+.tabbrowser-tab::before {
+    border: none !important;
+    color: grey !important;
+    opacity: .2 !important;
+}
+
+.tabbrowser-tab[visuallyselected="true"] {
+  background-color: #3e364d !important;
+  color: inherit !important; /* Use background tab text color for foreground tabs */
+}
+
+.tab-background {
+  border-top-width: 0 !important;
+}
+
+.tab-background[selected=true] {
+  background-color: #3e364d !important;
+  /* background-color: transparent !important; [> Make selected tab bg transparent <] */
+  background-image: none !important;
+}
+
+.tab-content {
+  padding: 6px 10px 7px 10px !important;
+}
+
+.tab-icon-image {
+  size: 32px;
+}
+
+.tab-line {
+  display: none;
+  -moz-box-ordinal-group: 2; /* Move the line to the bottom */
+}
+
+.tab-text {
+  font-family: Iosevka Medium !important;
+  font-size: 13px;
+}
