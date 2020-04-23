@@ -8,15 +8,15 @@ wal "$@"
 . "${HOME}/.cache/wal/colors.sh"
 
 # change color in Firefox userChrome.css file
-sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/ifajf7uc.default-release/chrome/userChrome.css
+sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/nf2nfkno.default-release/chrome/userChrome.css
 
 # change rofi foreground color 
 sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
 
 # change dunst color theme
-sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
-sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
-sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
+#sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+#sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+#sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
 
 i3-msg restart > /dev/null
 
