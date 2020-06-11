@@ -8,7 +8,8 @@ wal "$@"
 . "${HOME}/.cache/wal/colors.sh"
 
 # change color in Firefox userChrome.css file
-sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/nf2nfkno.default-release/chrome/userChrome.css
+USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
+sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/userChrome.css
 
 # change rofi foreground color 
 sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
