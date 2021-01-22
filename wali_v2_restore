@@ -1,0 +1,37 @@
+#!/bin/bash
+# wali : Wal Improved
+
+# pass all arguments to wal
+wal "$@" 
+
+# source wal colors
+. "${HOME}/.cache/wal/colors.sh"
+
+# change color in Firefox userChrome.css file
+#USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
+#sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/userChrome.css
+
+# change rofi foreground color 
+#sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
+
+# change dunst color theme
+#sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+#sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+#sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
+
+# change keyboard underglow color
+python ${HOME}/scripts/keyboard_color.py $color1
+
+# openrgb : CM & WS2812b
+openrgb -c ${color1:1}
+
+# liquidctl : AIO colors
+liquidctl set led color fixed ${color1:1}
+
+#i3-msg restart &
+
+#${HOME}/scripts/feh_ultrawide.sh
+
+notify-send "Wal Improved" "Theme restored." -u normal
+
+

@@ -6,21 +6,23 @@ if [ "$#" -ne 1 ]; then
 fi
 
 if [ "$1" == "normal" ]; then
-    xrandr --output DisplayPort-0 --auto --output HDMI-A-0 --left-of DisplayPort-0 --auto --output DVI-D-0 --right-of DisplayPort-0 --auto
+    xrandr --delmonitor ULTRAWIDE
+    xrandr --output DisplayPort-0 --auto --output DisplayPort-2 --left-of DisplayPort-0 --auto --output DisplayPort-1 --right-of DisplayPort-0 --auto
     notify-send -u normal "XRandR Mode Change !" "XRandR switched to normal mode."
 fi
 
 if [ "$1" == "ultrawide" ]; then
-    xrandr --output DisplayPort-0 --auto --output HDMI-A-0 --left-of DisplayPort-0 --auto --output DVI-D-0 --right-of DisplayPort-0 --auto
-    notify-send -u normal "XRandR Mode Change !" "XRandR switched to normal mode."
+    xrandr --output DisplayPort-1 --auto --output DisplayPort-2 --left-of DisplayPort-1 --auto --output DisplayPort-0 --right-of DisplayPort-1 --auto
+    xrandr --setmonitor ULTRAWIDE auto DisplayPort-2,DisplayPort-1,DisplayPort-0
+    notify-send -u normal "XRandR Mode Change !" "XRandR switched to ultrawide."
 fi
 
 if [ "$1" == "center_only" ]; then
-    xrandr --output DisplayPort-0 --auto --output HDMI-A-0 --off --output DVI-D-0 --off
+    xrandr --output DisplayPort-1 --auto --output DisplayPort-2 --off --output DisplayPort-0 --off
     notify-send -u normal "XRandR Mode Change !" "XRandR switched to center_only mode."
 fi
 
-
+i3-msg reload
 
 exec $HOME/.config/polybar/launch.sh
 

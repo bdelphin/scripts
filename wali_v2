@@ -1,8 +1,20 @@
 #!/bin/bash
 # wali : Wal Improved
 
+notify-send "DUNST_COMMAND_PAUSE"
+
+# loading wallpaper ...
+#feh --bg-fill --no-xinerama ${HOME}/Images/Wallpapers/loading.png
+
+killall polybar
+
 # pass all arguments to wal
-wal "$@" 
+wal "$@" -n
+#wal "$@"
+
+${HOME}/scripts/feh_ultrawide.sh
+
+i3-msg restart &
 
 # source wal colors
 . "${HOME}/.cache/wal/colors.sh"
@@ -19,11 +31,26 @@ sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/duns
 sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
 sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
 
-#i3-msg restart > /dev/null
+# change keyboard underglow color
+python ${HOME}/scripts/keyboard_color.py $color1
 
-i3-msg restart &
+# openrgb : CM & WS2812b
+openrgb -c ${color1:1}
 
-${HOME}/scripts/feh_ultrawide.sh
+# liquidctl : AIO colors
+liquidctl set led color fixed ${color1:1}
+
+
+# replace by dunst & polybar restart ?
+#i3-msg restart &
+
+#${HOME}/.config/dunst/wal_dunst.sh
+
+#${HOME}/.config/picom/launch.sh
+
+notify-send "DUNST_COMMAND_RESUME"
+
+#sleep 1
 
 notify-send "Wal Improved" "Theme generation over." -u normal
 
