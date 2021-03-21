@@ -23,6 +23,12 @@ i3-msg restart &
 USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
 sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/userChrome.css
 
+# change Discord color
+sed -i '/--bg-color:/c\--bg-color: '$color0';' ${HOME}/.config/discocss/custom.css
+sed -i '/--bg2-color:/c\--bg2-color: '$color0';' ${HOME}/.config/discocss/custom.css
+sed -i '/--fg-color:/c\--fg-color: '$color1';' ${HOME}/.config/discocss/custom.css
+
+
 # change rofi foreground color 
 sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
 
