@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup static IP
+After=multi-user.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/sh /home/baptiste/scripts/archDesk_static.sh
+
+[Install]
+WantedBy=default.target
