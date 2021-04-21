@@ -19,15 +19,23 @@ i3-msg restart &
 # source wal colors
 . "${HOME}/.cache/wal/colors.sh"
 
+
 # change color in Firefox userChrome.css file
 USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
-sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/userChrome.css
+sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/resources/colors.css
+
+# see : https://www.reddit.com/r/FirefoxCSS/comments/m6nhvq/reload_userchromecss_from_cli/
+# send Ctrl+h to firefox :
+window_id="$(xwininfo -tree -root | grep 'Navigator' | head -1 | grep -o '0x[0-9a-Z]*' | head -1)" #get window id for a firefox windown (doesnt matter which one)
+xdotool key --window "$window_id" --clearmodifiers "ctrl+h" # send ctrl+h keypress to firefox window
 
 # change Discord color
 sed -i '/--bg-color:/c\--bg-color: '$color0';' ${HOME}/.config/discocss/custom.css
 sed -i '/--bg2-color:/c\--bg2-color: '$color0';' ${HOME}/.config/discocss/custom.css
 sed -i '/--fg-color:/c\--fg-color: '$color1';' ${HOME}/.config/discocss/custom.css
 
+# change GLava color
+sed -i '/#define COLOR (/c\#define COLOR ('$color1')' ${HOME}/.config/glava/bars.glsl
 
 # change rofi foreground color 
 sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
@@ -45,7 +53,6 @@ openrgb -c ${color1:1}
 
 # liquidctl : AIO colors
 liquidctl set led color fixed ${color1:1}
-
 
 # replace by dunst & polybar restart ?
 #i3-msg restart &
