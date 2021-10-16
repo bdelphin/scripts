@@ -1,7 +1,7 @@
 #!/bin/bash
 # wali : Wal Improved
 
-notify-send "DUNST_COMMAND_PAUSE"
+#notify-send "DUNST_COMMAND_PAUSE"
 
 # loading wallpaper ...
 #feh --bg-fill --no-xinerama ${HOME}/Images/Wallpapers/loading.png
@@ -24,9 +24,9 @@ USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk 
 sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/userChrome.css
 
 # change Discord color
-sed -i '/--bg-color:/c\--bg-color: '$color0';' ${HOME}/.config/discocss/custom.css
-sed -i '/--bg2-color:/c\--bg2-color: '$color0';' ${HOME}/.config/discocss/custom.css
-sed -i '/--fg-color:/c\--fg-color: '$color1';' ${HOME}/.config/discocss/custom.css
+#sed -i '/--bg-color:/c\--bg-color: '$color0';' ${HOME}/.config/discocss/custom.css
+#sed -i '/--bg2-color:/c\--bg2-color: '$color0';' ${HOME}/.config/discocss/custom.css
+#sed -i '/--fg-color:/c\--fg-color: '$color1';' ${HOME}/.config/discocss/custom.css
 
 
 # change rofi foreground color 
@@ -38,13 +38,13 @@ sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/du
 sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
 
 # change keyboard underglow color
-python ${HOME}/scripts/keyboard_color.py $color1
+#python ${HOME}/scripts/keyboard_color.py $color1
 
 # openrgb : CM & WS2812b
-openrgb -c ${color1:1}
+#openrgb -c ${color1:1}
 
 # liquidctl : AIO colors
-liquidctl set led color fixed ${color1:1}
+#liquidctl set led color fixed ${color1:1}
 
 
 # replace by dunst & polybar restart ?
@@ -54,7 +54,7 @@ liquidctl set led color fixed ${color1:1}
 
 #${HOME}/.config/picom/launch.sh
 
-notify-send "DUNST_COMMAND_RESUME"
+#notify-send "DUNST_COMMAND_RESUME"
 
 #sleep 1
 
