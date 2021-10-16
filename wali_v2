@@ -1,0 +1,70 @@
+#!/bin/bash
+# wali : Wal Improved
+
+notify-send "DUNST_COMMAND_PAUSE"
+
+# loading wallpaper ...
+#feh --bg-fill --no-xinerama ${HOME}/Images/Wallpapers/loading.png
+
+killall polybar
+
+# pass all arguments to wal
+wal "$@" -n
+#wal "$@"
+
+${HOME}/scripts/feh_ultrawide.sh
+
+i3-msg restart &
+
+# source wal colors
+. "${HOME}/.cache/wal/colors.sh"
+
+
+# change color in Firefox userChrome.css file
+USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
+sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/resources/colors.css
+
+# see : https://www.reddit.com/r/FirefoxCSS/comments/m6nhvq/reload_userchromecss_from_cli/
+# send Ctrl+h to firefox :
+window_id="$(xwininfo -tree -root | grep 'Navigator' | head -1 | grep -o '0x[0-9a-Z]*' | head -1)" #get window id for a firefox windown (doesnt matter which one)
+xdotool key --window "$window_id" --clearmodifiers "ctrl+h" # send ctrl+h keypress to firefox window
+
+# change Discord color
+sed -i '/--bg-color:/c\--bg-color: '$color0';' ${HOME}/.config/discocss/custom.css
+sed -i '/--bg2-color:/c\--bg2-color: '$color0';' ${HOME}/.config/discocss/custom.css
+sed -i '/--fg-color:/c\--fg-color: '$color1';' ${HOME}/.config/discocss/custom.css
+
+# change GLava color
+sed -i '/#define COLOR (/c\#define COLOR ('$color1')' ${HOME}/.config/glava/bars.glsl
+
+# change rofi foreground color 
+sed -i '/walgen: #/c\    walgen: '$color1';' ${HOME}/.config/rofi/custom.rasi
+
+# change dunst color theme
+sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
+sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
+
+# change keyboard underglow color
+python ${HOME}/scripts/keyboard_color.py $color1
+
+# openrgb : CM & WS2812b
+openrgb -c ${color1:1}
+
+# liquidctl : AIO colors
+liquidctl set led color fixed ${color1:1}
+
+# replace by dunst & polybar restart ?
+#i3-msg restart &
+
+#${HOME}/.config/dunst/wal_dunst.sh
+
+#${HOME}/.config/picom/launch.sh
+
+notify-send "DUNST_COMMAND_RESUME"
+
+#sleep 1
+
+notify-send "Wal Improved" "Theme generation over." -u normal
+
+
