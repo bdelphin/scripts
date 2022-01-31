@@ -26,7 +26,10 @@ python ${HOME}/scripts/keyboard_color.py $color1
 openrgb -c ${color1:1}
 
 # liquidctl : AIO colors
-liquidctl set led color fixed ${color1:1}
+liquidctl --match "Hydro" set led color fixed ${color1:1}
+# liquidctl : Lighting Node Core
+liquidctl --match "Node" set led color clear
+liquidctl --match "Node" set led color fixed ${color1:1} --start-led 1 --maximum-leds 132
 
 #i3-msg restart &
 

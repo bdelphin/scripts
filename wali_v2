@@ -19,7 +19,6 @@ i3-msg restart &
 # source wal colors
 . "${HOME}/.cache/wal/colors.sh"
 
-
 # change color in Firefox userChrome.css file
 USERCHROME_FOLDER=$(ls ${HOME}/.mozilla/firefox/ | grep "default-release" | awk "{print $9}");
 sed -i '/--bg-color:/c\--bg-color: '$color1';' ${HOME}/.mozilla/firefox/$USERCHROME_FOLDER/chrome/resources/colors.css
@@ -45,14 +44,22 @@ sed -i '/background = "#/c\background = "'$color1'" ' ${HOME}/.config/dunst/duns
 sed -i '/frame_color = "#/c\frame_color = "'$color1'" ' ${HOME}/.config/dunst/dunstrc
 sed -i '/foreground = "#/c\foreground = "'$color7'" ' ${HOME}/.config/dunst/dunstrc
 
+# change cava foreground color
+sed -i '/foreground = /c\foreground = "'$color1'" ' ${HOME}/.config/cava/config
+
 # change keyboard underglow color
 python ${HOME}/scripts/keyboard_color.py $color1
 
-# openrgb : CM & WS2812b
+# openrgb : CM, WS2812b & Lighting Node Core
 openrgb -c ${color1:1}
 
 # liquidctl : AIO colors
-liquidctl set led color fixed ${color1:1}
+liquidctl --match "Hydro" set led color fixed ${color1:1}
+# liquidctl : Lighting Node Core
+liquidctl --match "Node" set led color clear
+liquidctl --match "Node" set led color fixed ${color1:1} --start-led 1 --maximum-leds 132
+
+
 
 # replace by dunst & polybar restart ?
 #i3-msg restart &
@@ -67,4 +74,5 @@ notify-send "DUNST_COMMAND_RESUME"
 
 notify-send "Wal Improved" "Theme generation over." -u normal
 
-
+wallpaper=$(cat ${HOME}/.cache/wal/wal)
+betterlockscreen -u $wallpaper

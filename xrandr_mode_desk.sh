@@ -12,7 +12,7 @@ if [ "$1" == "normal" ]; then
 fi
 
 if [ "$1" == "ultrawide" ]; then
-    xrandr --output DisplayPort-1 --auto --output DisplayPort-2 --left-of DisplayPort-1 --auto --output DisplayPort-0 --right-of DisplayPort-1 --auto
+    xrandr --output DisplayPort-0 --auto --output DisplayPort-2 --left-of DisplayPort-0 --auto --output DisplayPort-1 --right-of DisplayPort-0 --auto
     xrandr --setmonitor ULTRAWIDE auto DisplayPort-2,DisplayPort-1,DisplayPort-0
     notify-send -u normal "XRandR Mode Change !" "XRandR switched to ultrawide."
 fi
